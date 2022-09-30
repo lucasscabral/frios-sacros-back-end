@@ -26,24 +26,24 @@ export async function createUser(data: ISignUp) {
 }
 
 export async function verifyEmailLogin(email: string) {
-    const emailEncontrado: User | null = await searchByEmail(email)
-    if (!emailEncontrado) {
+    const emailFound: User | null = await searchByEmail(email)
+    if (!emailFound) {
         throw { code: "unauthorized", message: "Email ou senha inválido" }
     }
-    return emailEncontrado
+    return emailFound
 }
 
-export async function verifyPassword(senhaPassada: string, senhaEcriptografada: string) {
-    const comparaSenha = compareSync(senhaPassada, senhaEcriptografada)
-    if (!comparaSenha) {
+export async function verifyPassword(requestPassword: string, passwordInDatabase: string) {
+    const comparePassword = compareSync(requestPassword, passwordInDatabase)
+    if (!comparePassword) {
         throw { code: "unauthorized", message: "Email ou senha inválido" }
     }
-    return comparaSenha
+    return comparePassword
 }
 
-export async function generateToken(dados: ISignInData) {
+export async function generateToken(data: ISignInData) {
     const SECRETJWT: string = process.env.JWT_SECRET || ""
-    const token = jwt.sign(dados, SECRETJWT, {
+    const token = jwt.sign(data, SECRETJWT, {
         expiresIn: 60 * 60 * 24,
     });
 
