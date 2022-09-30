@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import { searchByEmail, insertUser } from "../repositories/authRepository";
 import bcrypt, { compareSync } from "bcrypt"
 import { ISignUp, ISignInData } from "../utils/interfaceUtils";
+import { User } from "@prisma/client";
 
 export async function verifyEmailSignUp(email: string) {
 
@@ -25,7 +26,7 @@ export async function createUser(data: ISignUp) {
 }
 
 export async function verifyEmailLogin(email: string) {
-    const emailEncontrado = await searchByEmail(email)
+    const emailEncontrado: User | null = await searchByEmail(email)
     if (!emailEncontrado) {
         throw { code: "unauthorized", message: "Email ou senha inválido" }
     }
