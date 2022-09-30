@@ -12,7 +12,6 @@ export async function signUp(req: Request, res: Response) {
         profile_url: string,
     } = req.body;
 
-    console.log(req.body)
     await authService.verifyEmailSignUp(body.email)
     const passwordEncrypted = await authService.encryptPassword(body.password)
     delete body.password
