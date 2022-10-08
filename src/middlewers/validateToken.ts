@@ -9,14 +9,14 @@ export async function validarToken(req: Request, res: Response, next: NextFuncti
         throw { code: "unauthorized", message: "Acesso negado. Nenhum token fornecido." }
     }
 
-    let corpoToken;
+    let bodyToken;
 
     try {
         const SECRETJWT: string = process.env.JWT_SECRET || "";
         const decoded: string | JwtPayload = jwt.verify(token, SECRETJWT);
 
-        corpoToken = decoded;
-        res.locals.corpoToken = corpoToken;
+        bodyToken = decoded;
+        res.locals.bodyToken = bodyToken;
 
         next();
     } catch (error) {
