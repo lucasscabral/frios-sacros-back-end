@@ -31,3 +31,15 @@ export async function deleteShoppingCartUser(_: Request, res: Response) {
 
     res.sendStatus(200)
 }
+
+export async function deleteProductShoppingCart(req: Request, res: Response) {
+    const productId = Number(req.params.productId)
+    try {
+        await shoppingCartService.deleteProductShoppingCart(productId)
+
+        res.sendStatus(200)
+    } catch (error) {
+        console.log(error)
+        res.sendStatus(500)
+    }
+}

@@ -13,3 +13,7 @@ export async function getAllProductsShoppingCart(userId: number) {
 export async function deleteShoppingCartUser(userId: number) {
     return await shoppingCartRepository.deleteShoppingCartUser(userId)
 }
+
+export async function deleteProductShoppingCart(productId: number) {
+    return await shoppingCartRepository.deleteProductShoppingCart(productId)
+}
