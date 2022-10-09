@@ -10,10 +10,16 @@ export async function getAllProductsShoppingCart(userId: number) {
     return allProductsShoppingCart
 }
 
+export async function getProductShoppingCart(userId: number, productId: number) {
+    const allProductsUser = await getAllProductsShoppingCart(userId)
+    const product = allProductsUser.filter(product => product.product.id === productId)
+    return product[0]
+}
+
 export async function deleteShoppingCartUser(userId: number) {
     return await shoppingCartRepository.deleteShoppingCartUser(userId)
 }
 
-export async function deleteProductShoppingCart(productId: number) {
-    return await shoppingCartRepository.deleteProductShoppingCart(productId)
+export async function deleteProductShoppingCart(productIdInShoppingCart: number) {
+    return await shoppingCartRepository.deleteProductShoppingCart(productIdInShoppingCart)
 }

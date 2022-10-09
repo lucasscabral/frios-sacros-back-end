@@ -34,8 +34,10 @@ export async function deleteShoppingCartUser(userId: number) {
     })
 }
 
-export async function deleteProductShoppingCart(productId: number) {
+export async function deleteProductShoppingCart(productIdInShoppingCart: number) {
     return await prisma.shopping_Cart.delete({
-        where: { id: productId }
+        where: {
+            id: productIdInShoppingCart
+        }
     })
 }

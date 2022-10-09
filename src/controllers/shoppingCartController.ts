@@ -33,9 +33,12 @@ export async function deleteShoppingCartUser(_: Request, res: Response) {
 }
 
 export async function deleteProductShoppingCart(req: Request, res: Response) {
+    const { id: userId } = res.locals.bodyToken as { id: number }
     const productId = Number(req.params.productId)
     try {
-        await shoppingCartService.deleteProductShoppingCart(productId)
+        const { id: productIdInShoppingCart } = await shoppingCartService.getProductShoppingCart(userId, productId)
+
+        await shoppingCartService.deleteProductShoppingCart(productIdInShoppingCart)
 
         res.sendStatus(200)
     } catch (error) {
