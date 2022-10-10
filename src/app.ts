@@ -14,6 +14,4 @@ app.use(cors())
 app.use(router)
 app.use(errorsHendler)
 
-const PORT: number = Number(process.env.PORT) || 5002
-
-app.listen(PORT, () => console.log(`Servidor rodando na porta:${PORT}`))
+export default app;
