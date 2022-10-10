@@ -10,6 +10,7 @@ export async function addProductShoppingCart(body: IInsertData) {
 export async function updateStatusProduct(body: IInsertData, status: boolean) {
     const product = await getProductShoppingCart(body.user_id, body.product_id)
     await shoppingCartRepository.updateStatusProduct(product.id, status)
+    return product
 }
 
 export async function getAllProductsShoppingCart(userId: number) {
@@ -29,7 +30,6 @@ export async function deleteShoppingCartUser(userId: number) {
 
 export async function deleteProductShoppingCart(body: IInsertData) {
     const status = false
-    await updateStatusProduct(body, status)
-    //await shoppingCartRepository.deleteProductShoppingCart(body.product_id)
-    //productIdInShoppingCart
+    const product = await updateStatusProduct(body, status)
+    await shoppingCartRepository.deleteProductShoppingCart(product.id)
 }
