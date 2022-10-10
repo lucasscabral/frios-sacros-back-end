@@ -9,6 +9,7 @@ export async function getAllProducts() {
             price: true,
             inventory: true,
             image_url: true,
+            selected: true,
             categories: {}
         }
     })
