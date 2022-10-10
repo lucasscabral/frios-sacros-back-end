@@ -2,7 +2,23 @@ import prisma from "../prisma/prismaClient";
 import { IInsertData } from "../types/shoppingCartTypes";
 
 export async function addProductShoppingCart(body: IInsertData) {
-    return await prisma.shopping_Cart.create({ data: body })
+    await prisma.shopping_Cart.create({ data: body })
+
+}
+
+export async function updateStatusProduct(productIdInShoppingCart: number, status: boolean) {
+    await prisma.shopping_Cart.update({
+        where: {
+            id: productIdInShoppingCart
+        },
+        data: {
+            product: {
+                update: {
+                    selected: status
+                }
+            }
+        }
+    })
 }
 
 export async function getAllProductsShoppingCart(userId: number) {
@@ -16,6 +32,7 @@ export async function getAllProductsShoppingCart(userId: number) {
                     image_url: true,
                     name: true,
                     price: true,
+                    selected: true
                 }
             },
             user: {
