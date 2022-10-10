@@ -27,6 +27,7 @@ model Product {
   price         Float
   inventory     Int
   image_url     String
+  selected      Boolean         @default(false)
   categories    Categories      @relation(fields: [category_id], references: [id])
   category_id   Int
   Shopping_Cart Shopping_Cart[]
